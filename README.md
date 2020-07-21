@@ -6,7 +6,7 @@ Ability to create a ReadMe file using Command Line prompts
 
 ## Table of Contents
 
-Table of Contents
+* [Installation](#installation)
 
 ## Installation
 

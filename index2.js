@@ -42,15 +42,17 @@ inquirer
             message: questions[3],
             name: "projectDesc"
         },
-        // Change to list and add syntax with new license variables
         {
             type: "list",
             message: questions[4],
             name: "license",
             choices: [
-                "email",
-                "phone",
-                "telekinesis"
+                "MIT",
+                "APACHE 2.0",
+                "BSD 2",
+                "BSD 3",
+                "GPL 3.0",
+                "None"
               ]
         },
         {
@@ -73,12 +75,6 @@ inquirer
             message: questions[8],
             name: "userContrib"
         }
-        // {
-        //     type: "checkbox",
-        //     message: "What is your preferred method of communciation?",
-        //     name: "communication",
-        //     choices: [ "Phone", "Email"]
-        // }
     ])
 
     .then(function(response) {
@@ -125,25 +121,6 @@ inquirer
                 }        
         });
     })
-
-
-
-// .then(function (data) {
-
-//     var fileName = "README.md";
-
-//     fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function(err) {
-    
-//         if (err) {
-//         return console.log(err);
-//         }
-    
-//         console.log("Success!");
-    
-//     });
-//     });
-
-
 
 // function to write README file
 // .then(function writeToFile(fileName, data) {
