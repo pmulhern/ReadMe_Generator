@@ -7,36 +7,16 @@ let genMark = require("./utils/generateMarkdown.js");
 
 console.log(genMark)
 
-const readMeHeaders = ["## Description",
-"## Table of Contents",
-"## Installation",
-"## Usage",
-"## License",
-"## Contributing",
-"## Tests",
-"## Questions",
-]
-
-
-
 // array of questions for user.  Used Questions from instructor example.
-// 0
+
 const questions = ["What is your GitHub username?",
-// 1
 "What is your email address?",
-// 2
 "What is your project's name?",
-// 3
 "Please write a short description of your project.",
-// 4
 "What kind of license should your project have?",
-// 5
 "what command should be run to install dependencies?",
-// 6
 "What command should be run to run tests?",
-// 7
 "What does the user need to know about using the repo?",
-// 8
 "What does the user need to know about contributing to the repo?",
 ];
 
@@ -64,9 +44,14 @@ inquirer
         },
         // Change to list and add syntax with new license variables
         {
-            type: "input",
+            type: "list",
             message: questions[4],
-            name: "license"
+            name: "license",
+            choices: [
+                "email",
+                "phone",
+                "telekinesis"
+              ]
         },
         {
             type: "input",
@@ -76,7 +61,7 @@ inquirer
         {
             type: "input",
             message: questions[6],
-            name: "command"
+            name: "tests"
         },
         {
             type: "input",
@@ -96,20 +81,69 @@ inquirer
         // }
     ])
 
-.then(function (data) {
+    .then(function(response) {
 
-    var fileName = "README.md";
+        var fileName = "README.md";
+        
+        var username = response.username;
+        var email = response.email;
+        var projectName = response.projectName;
+        
+        var projectDesc = response.projectDesc;
+        var license = response.license;
+        var dependencies = response.dependencies;
+        
+        var tests = response.tests;
+        var userIntel = response.userIntel;
+        var userContrib = response.userContrib;
+        var questions = "If you have any question about the repo, open an issue or contact me directly at " + email +". You can fin more of my work at "  + [username] + "(https://gitbuh.com/" + username + "/)."
 
-    fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function(err) {
+        var readMeHeaders = ["# "+ projectName,
+        "## Description",
+        "## Table of Contents",
+        "## Installation",
+        "## Usage",
+        "## License",
+        "## Contributing",
+        "## Tests",
+        "## Questions",
+        ];
+
+        var output = readMeHeaders[0] + "\n\n" +
+        readMeHeaders[1] + "\n\n" + projectDesc + "\n\n" +
+        readMeHeaders[2] + "\n\n" + "Table of Contents" + "\n\n" +
+        readMeHeaders[3] + "\n\n" + dependencies + "\n\n" +
+        readMeHeaders[4] + "\n\n" + userIntel + "\n\n" +
+        readMeHeaders[5] + "\n\n" + license + "\n\n" +
+        readMeHeaders[6] + "\n\n" + userContrib + "\n\n" +
+        readMeHeaders[7] + "\n\n" + tests + "\n\n" +
+        readMeHeaders[8] + "\n\n" + questions;
+ 
+        fs.writeFile(fileName, output, function(err){
+            if (err) {
+                return console.log(err);
+                }        
+        });
+    })
+
+
+
+// .then(function (data) {
+
+//     var fileName = "README.md";
+
+//     fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function(err) {
     
-        if (err) {
-        return console.log(err);
-        }
+//         if (err) {
+//         return console.log(err);
+//         }
     
-        console.log("Success!");
+//         console.log("Success!");
     
-    });
-    });
+//     });
+//     });
+
+
 
 // function to write README file
 // .then(function writeToFile(fileName, data) {
