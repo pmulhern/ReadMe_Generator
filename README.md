@@ -1,4 +1,6 @@
-# README Generator
+# README GENERATOR
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Description
 
@@ -28,11 +30,11 @@ npm install
 
 ## Usage
 
-It's Awesome!
+It's Awesome
 
 ## License
 
-MIT
+This project is licensed under the APACHE 2.0 license
 
 ## Contributing
 
