@@ -1,32 +1,50 @@
-# ReadMe Generator
+# README Generator
 
 ## Description
 
-Ability to create a ReadMe file using Command Line prompts
+Ability to create a professional README file through a Command Line prompt
 
 ## Table of Contents
 
 * [Installation](#installation)
 
+* [Usage](#usage)
+
+* [License](#license)
+
+* [Contributing](#contributing)
+
+* [Tests](#tests)
+
+* [Questions](#questions)
+
 ## Installation
 
-npm i
+To install necessary dependencies, run the following command:
+
+```
+npm install
+```
 
 ## Usage
 
-It's awesome
+It's Awesome!
 
 ## License
 
-Yes
+MIT
 
 ## Contributing
 
-Be Careful
+Not Applicable
 
 ## Tests
 
-yes
+To run tests, run the following command:
+
+```
+npm test
+```
 
 ## Questions
 
