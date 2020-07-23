@@ -2,12 +2,8 @@
 let fs = require("fs");
 // Require the inquirer package for prompts
 let inquirer = require("inquirer");
-
-let badges = require("./utils/badges.js")
 // Not sure yet.  This was provided by instructor
 let genMark = require("./utils/generateMarkdown.js");
-
-console.log(genMark)
 
 // array of questions for user.  Used Questions from instructor example.
 const questions = ["What is your GitHub username?",
@@ -81,17 +77,14 @@ inquirer
 
     .then(function(response) {
 
-        // Setting variables.  Mainly pulled from above prompts and will populate README
+        // Setting variables.  Mainly pulled from above prompts and will populate README. Try Object Deconstruction here.
         let fileName = "README.md";
-        
         let username = response.username;
         let email = response.email;
         let projectName = response.projectName;
-        
         let projectDesc = response.projectDesc;
         let license = response.license;
         let dependencies = response.dependencies;
-        
         let tests = response.tests;
         let userIntel = response.userIntel;
         let userContrib = response.userContrib;
@@ -119,7 +112,7 @@ inquirer
         "## Questions",
         ];
 
-        let bages = ""
+        let badges = ""
         if(license==="MIT"){
             badges = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
         } else if (license==="APACHE 2.0"){
@@ -134,7 +127,7 @@ inquirer
             "No License Used"
         }
 
-        // This likely needs tobe turned into a function
+        // This likely needs tobe turned into a function.  Try For Loop here
         let output = readMeHeaders[0] + "\n\n" +
         badges + "\n\n" +
         readMeHeaders[1] + "\n\n" + projectDesc + "\n\n" +
@@ -153,15 +146,6 @@ inquirer
         "```" + "\n\n" +
         readMeHeaders[8] + "\n\n" + questions;
 
-
-            // let badges =  {
-            // "MIT": `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`,
-            // "APACHE 2.0": `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`,
-            // "BSD 2": `[![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)`,
-            // "BSD 3": `[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)`,
-            // "Eclipse": `[![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)`,
-            // }   
- 
         // Code to populate the README.
         fs.writeFile(fileName, output, function(err){
             if (err) {
@@ -169,30 +153,6 @@ inquirer
                 }        
         });
     })
-
-// function to write README file
-// .then(function writeToFile(fileName, data) {
-
-//     var fileName = "README.md";
-
-//     fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function(err) {
-  
-//       if (err) {
-//         return console.log(err);
-//       }
-  
-//       console.log("Success!");
-  
-//     });
-//   });
-
-// function to initialize program
-// function init() {
-
-// }
-
-// function call to initialize program
-// init();
 
 
 
