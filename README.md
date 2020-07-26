@@ -1,10 +1,10 @@
-# README Generator
+# Generate a README file using Command Line prompts
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 
-Ability to create a professional README file through a Command Line prompt
+Ability to create a professional README file through a Command Line prompt.
 
 ## Table of Contents
 
@@ -30,7 +30,7 @@ npm install
 
 ## Usage
 
-This is AWESOME!!
+Committ often and early.  Works great!!
 
 ## License
 
@@ -38,7 +38,7 @@ This project is licensed under the MIT license
 
 ## Contributing
 
-Not Applicable
+Don't break it!
 
 ## Tests
 
@@ -50,4 +50,4 @@ npm test
 
 ## Questions
 
-If you have any question about the repo, open an issue or contact me directly at patrick.j.mulhern1@gmail.com. You can fin more of my work at pmulhern(https://gitbuh.com/pmulhern/).
+If you have any question about the repo, open an issue or contact me directly at patrick.j.mulhern1@gmail. You can find more of my work at pmulhern(https://gitbuh.com/pmulhern/).

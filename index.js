@@ -5,41 +5,19 @@ let inquirer = require("inquirer");
 // Not sure yet.  This was provided by instructor
 let genMark = require("./utils/generateMarkdown.js");
 
-console.log(genMark)
-
-const readMeHeaders = ["## Description",
-"## Table of Contents",
-"## Installation",
-"## Usage",
-"## License",
-"## Contributing",
-"## Tests",
-"## Questions",
-]
-
-
-
 // array of questions for user.  Used Questions from instructor example.
-// 0
 const questions = ["What is your GitHub username?",
-// 1
 "What is your email address?",
-// 2
 "What is your project's name?",
-// 3
 "Please write a short description of your project.",
-// 4
 "What kind of license should your project have?",
-// 5
 "what command should be run to install dependencies?",
-// 6
 "What command should be run to run tests?",
-// 7
 "What does the user need to know about using the repo?",
-// 8
 "What does the user need to know about contributing to the repo?",
 ];
 
+// Inquirer prompts
 inquirer
     .prompt([
         {
@@ -62,11 +40,18 @@ inquirer
             message: questions[3],
             name: "projectDesc"
         },
-        // Change to list and add syntax with new license variables
         {
-            type: "input",
+            type: "list",
             message: questions[4],
-            name: "license"
+            name: "license",
+            choices: [
+                "MIT",
+                "APACHE 2.0",
+                "BSD 2",
+                "BSD 3",
+                "GPL 3.0",
+                "None"
+            ]
         },
         {
             type: "input",
@@ -76,7 +61,7 @@ inquirer
         {
             type: "input",
             message: questions[6],
-            name: "command"
+            name: "tests"
         },
         {
             type: "input",
@@ -88,52 +73,86 @@ inquirer
             message: questions[8],
             name: "userContrib"
         }
-        // {
-        //     type: "checkbox",
-        //     message: "What is your preferred method of communciation?",
-        //     name: "communication",
-        //     choices: [ "Phone", "Email"]
-        // }
     ])
 
-.then(function (data) {
+    .then(function(response) {
 
-    var fileName = "README.md";
+        // Setting variables.  Mainly pulled from above prompts and will populate README. Try Object Deconstruction here?
+        let fileName = "README.md";
+        let username = response.username;
+        let email = response.email;
+        let projectName = response.projectName;
+        let projectDesc = response.projectDesc;
+        let license = response.license;
+        let dependencies = response.dependencies;
+        let tests = response.tests;
+        let userIntel = response.userIntel;
+        let userContrib = response.userContrib;
+        let questions = "If you have any question about the repo, open an issue or contact me directly at " + email +". You can find more of my work at "  + [username] + "(https://gitbuh.com/" + username + "/)."
 
-    fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function(err) {
-    
-        if (err) {
-        return console.log(err);
+        // Anchor link variable for the README. Takes user to different sections of the document.
+        let anchorLinks = [
+        "* [Installation](#installation)"+ "\n\n" +
+        "* [Usage](#usage)"+ "\n\n" +
+        "* [License](#license)"+ "\n\n" +
+        "* [Contributing](#contributing)"+ "\n\n" +
+        "* [Tests](#tests)"+ "\n\n" +
+        "* [Questions](#questions)"
+        ]
+
+        // README Section Headers
+        let readMeHeaders = ["# "+ projectName,
+        "## Description",
+        "## Table of Contents",
+        "## Installation",
+        "## Usage",
+        "## License",
+        "## Contributing",
+        "## Tests",
+        "## Questions",
+        ];
+
+        let badges = ""
+        if(license==="MIT"){
+            badges = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+        } else if (license==="APACHE 2.0"){
+            badges =`[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+        } else if (license==="BSD 2"){
+            badges =`[![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)`
+        } else if (license==="BSD 3"){
+            badges = `[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)`
+        } else if (license==="Eclipse"){
+            badges = `[![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)`
+        } else {
+            "No License Used"
         }
-    
-        console.log("Success!");
-    
-    });
-    });
 
-// function to write README file
-// .then(function writeToFile(fileName, data) {
+        // This likely needs to be turned into a function.  Try For Loop here?
+        let output = readMeHeaders[0] + "\n\n" +
+        badges + "\n\n" +
+        readMeHeaders[1] + "\n\n" + projectDesc + "\n\n" +
+        readMeHeaders[2] + "\n\n" + anchorLinks + "\n\n" +
+        readMeHeaders[3] + "\n\n" + "To install necessary dependencies, run the following command:" + "\n\n" +
+        "```" + "\n" +
+        dependencies + "\n" +
+        "```" + "\n\n" +
+        readMeHeaders[4] + "\n\n" + userIntel + "\n\n" +
+        readMeHeaders[5] + "\n\n" + 
+        "This project is licensed under the " + license + " license" + "\n\n" +
+        readMeHeaders[6] + "\n\n" + userContrib + "\n\n" +
+        readMeHeaders[7] + "\n\n" + "To run tests, run the following command:" + "\n\n" +
+        "```" + "\n" +
+        tests + "\n" +
+        "```" + "\n\n" +
+        readMeHeaders[8] + "\n\n" + questions;
 
-//     var fileName = "README.md";
-
-//     fs.writeFile(fileName, JSON.stringify(data, null, '\t'), function(err) {
-  
-//       if (err) {
-//         return console.log(err);
-//       }
-  
-//       console.log("Success!");
-  
-//     });
-//   });
-
-// function to initialize program
-// function init() {
-
-// }
-
-// function call to initialize program
-// init();
+        // Code to populate the README.
+        fs.writeFile(fileName, output, function(err){
+            if (err) {
+                return console.log(err);
+                }        
+        });
+    })
 
 
 
