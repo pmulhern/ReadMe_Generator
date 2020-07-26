@@ -88,7 +88,7 @@ inquirer
         let tests = response.tests;
         let userIntel = response.userIntel;
         let userContrib = response.userContrib;
-        let questions = "If you have any question about the repo, open an issue or contact me directly at " + email +". You can find more of my work at "  + [username] + "(https://gitbuh.com/" + username + "/)."
+        let questions = "If you have any question about the repo, open an issue or contact me directly at " + email +". You can find more of my work at "  + [username] + "(https://github.com/" + username + "/)."
 
         // Anchor link variable for the README. Takes user to different sections of the document.
         let anchorLinks = [
